@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare("INSERT INTO users (role, nama, email, password) VALUES (?, ?, ?, ?)");
 
     if ($stmt) {
-        $stmt->bind_param("sss", $role,  $nama, $email, $password);
+        $stmt->bind_param("ssss", $role,  $nama, $email, $password);
 
         if ($stmt->execute()) {
             header("Location: ../login.php");

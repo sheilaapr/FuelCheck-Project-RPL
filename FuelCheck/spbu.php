@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'auth/db.php';
 $id = $_GET['id'] ?? 0;
 
@@ -45,9 +46,16 @@ $laporan = $conn->query("SELECT l.*, u.nama AS pelapor_nama FROM laporan l JOIN 
       <a href="dashboard.php" class="text-2xl font-['Pacifico'] text-primary">FuelCheck</a>
       <nav class="hidden md:flex space-x-6">
         <a href="dashboard.php" class="text-gray-600 hover:text-primary">Beranda</a>
-        <a href="laporan.php" class="text-gray-600 hover:text-primary">Lapor</a>
-        <a href="spbu.php" class="text-primary font-semibold">SPBU</a>
-        <a href="#" class="text-gray-600 hover:text-primary">Profil</a>
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+            <a href="admin_laporan.php" class="text-gray-600 hover:text-primary">Verifikasi Laporan</a>
+            <a href="admin.php" class="text-gray-600 hover:text-primary">Kelola SPBU</a>
+            <a href="spbu.php" class="text-primary font-semibold">SPBU</a>
+            <a href="#" class="text-gray-600 hover:text-primary">Profil</a>
+        <?php else: ?>
+            <a href="laporan.php" class="text-gray-600 hover:text-primary">Lapor</a>
+            <a href="spbu.php" class="text-primary font-semibold">SPBU</a>
+            <a href="#" class="text-gray-600 hover:text-primary">Profil</a>
+        <?php endif; ?>
       </nav>
     </div>
   </header>

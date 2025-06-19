@@ -52,7 +52,24 @@ include 'auth/db.php';
                 <a href="dashboard.php" class="text-gray-900 font-medium hover:text-primary transition">Beranda</a>
                 <a href="laporan.php" class="text-gray-600 hover:text-primary transition">Lapor</a>
                 <a href="spbu.php" class="text-gray-600 hover:text-primary transition">SPBU</a>
-                <a href="#" class="text-gray-600 hover:text-primary transition">Profil</a>
+                <div class="relative group">
+                    <a href="#" class="text-gray-600 hover:text-primary transition flex items-center">
+                        Profil
+                        <i class="ri-arrow-down-s-line ml-1"></i>
+                    </a>
+                    <div class="absolute right-0 mt-2 w-56 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition z-50">
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <div class="px-4 py-3 border-b">
+                                <div class="font-semibold text-gray-800"><?php echo htmlspecialchars($_SESSION['user']['nama']); ?></div>
+                                <div class="text-xs text-gray-500 mt-1">Login sebagai <span class="font-semibold"><?php echo htmlspecialchars($_SESSION['user']['role']); ?></span></div>
+                            </div>
+                            <a href="login.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Ganti Akun</a>
+                            <a href="register.php" class="block px-4 py-2 text-red-600 hover:bg-gray-100">Logout</a>
+                        <?php else: ?>
+                            <a href="login.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </nav>
 
             <!-- <div class="flex items-center space-x-4">
